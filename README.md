@@ -19,3 +19,6 @@ fill in the missing information inside index.js and inside .env
 if you're joining to a LAN server, make sure to uncomment "port: " and fill in the correct port number  
 
 finally, make sure everything is inside a folder, and run the appropriate "runner" file for your system (if you're on linux you may have to type "sudo chmod +x linux-runner" into the terminal)  
+
+If you cant get the .env file to work on linux, you can replace
+process.env.EMAIL, process.env.PASSWORD, and process.env.BOT_TOKEN, with their respective values inside of index.js
