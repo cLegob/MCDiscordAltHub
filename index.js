@@ -48,10 +48,12 @@ async function toDiscordChat(msg) {
 }
 
 minecraftBot.on('message', (message) => {
+  var current = new Date();
+  const time = '[' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds() + ']'
   if (message.toString().includes("joined the game") || message.toString().includes("left the game")) {
-    toDiscordChat('**' + message.toString() + '**');
+    toDiscordChat('**' + time + ' ' + message.toString() + '**');
   } else {
-    toDiscordChat(message.toString());
+    toDiscordChat(time + ' ' + message.toString());
   }
 })
 
