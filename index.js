@@ -16,7 +16,7 @@ function botMaker ()  {
     username: process.env.EMAIL,
     password: process.env.PASSWORD,
     // port: 12345, // uncomment this if connecting to LAN and put in the right port number
-    auth: 'microsoft',
+    auth: 'microsoft', // comment this out if you haven't migrated
   });
 }
 
