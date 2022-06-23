@@ -31,10 +31,12 @@ discordBot.on('ready', () => {
 
 minecraftBot.on('login', () => {
   console.log('Minecraft bot has logged in!');
+  toDiscordChat('***!Went Online!***')
 });
 
 minecraftBot.on('end', () => {
   console.log('Minecraft bot disconnected from the server.');
+  toDiscordChat('***!Went Offline!***')
 });
 
 // Discord message handler
@@ -46,10 +48,12 @@ async function toDiscordChat(msg) {
 }
 
 minecraftBot.on('message', (message) => {
+  var current = new Date();
+  const time = '[' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds() + ']'
   if (message.toString().includes("joined the game") || message.toString().includes("left the game")) {
-    toDiscordChat('**' + message.toString() + '**');
+    toDiscordChat('**' + time + ' ' + message.toString() + '**');
   } else {
-    toDiscordChat(message.toString());
+    toDiscordChat(time + ' ' + message.toString());
   }
 })
 
@@ -59,7 +63,6 @@ discordBot.on('messageCreate', async (message) => {
 	if (connected === false && message.toString() === '?join') {
 		connected = !connected
 		console.log(connected)
-		toDiscordChat('***!Going Online!***')
 		console.log("This is pid " + process.pid);
 setTimeout(function () {
     process.on("exit", function () {
@@ -70,9 +73,8 @@ setTimeout(function () {
         });
     });
     process.exit();
-}, 5000);
+});
 	} else if (message.toString() === '?leave' && connected !== false) {
-		toDiscordChat('***!Went Offline!***')
 		minecraftBot.quit()
 		connected = !connected;
 		console.log(connected)
