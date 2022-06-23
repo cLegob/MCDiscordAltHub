@@ -16,4 +16,4 @@ create a discord bot, get it's token, get your discord server's ID, and the chan
 
 fill in the missing information inside index.js and inside .env  
 
-finally, make sure everything is inside a folder, and run the appropriate runnable for your system
+finally, make sure everything is inside a folder, and run the appropriate runnable for your system (if you're on linux you may have to type "sudo chmod +x linux-runner" into the terminal)
