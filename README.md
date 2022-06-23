@@ -11,5 +11,7 @@ npm install discord.js
 npm install dotenv  
 
 rename env.txt to just .env  
+
 create a discord bot, get it's token, get your discord server's ID, and the channel ID of where you want your bot to be located. This can be changed.  
+
 fill in the missing information inside index.js and inside .env  
