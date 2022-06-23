@@ -10,5 +10,5 @@ npm install mineflayer
 npm install discord.js  
 npm install dotenv  
 
-convert env.txt to just .env  
+rename env.txt to just .env  
 fill in the missing information inside index.js and inside .env  
