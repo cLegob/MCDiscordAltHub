@@ -18,4 +18,4 @@ fill in the missing information inside index.js and inside .env
 
 if you're joining to a LAN server, make sure to uncomment "port: " and fill in the correct port number  
 
-finally, make sure everything is inside a folder, and run the appropriate runnable for your system (if you're on linux you may have to type "sudo chmod +x linux-runner" into the terminal)  
+finally, make sure everything is inside a folder, and run the appropriate "runner" file for your system (if you're on linux you may have to type "sudo chmod +x linux-runner" into the terminal)  
