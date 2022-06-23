@@ -12,17 +12,17 @@ let minecraftBot;
 botMaker();
 function botMaker ()  { 
   minecraftBot = mineflayer.createBot({
-    host: 'server ip, localhost for LAN',
+    host: 'minecraft.server', // server IP goes here, use local host if connecting to LAN
     username: process.env.EMAIL,
     password: process.env.PASSWORD,
-    // port: 12345,
+    // port: 12345, // uncomment this if connecting to LAN and put in the right port number
     auth: 'microsoft',
   });
 }
 
 // ID variables
-const discordServerID = 'serverID';
-const chatChannelID = 'channelID';
+const discordServerID = 'serverID';  // discord server ID here
+const chatChannelID = 'channelID';  // discord channel ID here
 
 // Console log bot logins and disconnects
 discordBot.on('ready', () => {
@@ -54,9 +54,8 @@ minecraftBot.on('message', (message) => {
 })
 
 discordBot.on('messageCreate', async (message) => {
-
+	try {
     if (message.author.id === discordBot.user.id || message.channel.id !== chatChannelID || message.author.bot) return;
-		
 	if (connected === false && message.toString() === '?join') {
 		connected = !connected
 		console.log(connected)
@@ -72,7 +71,7 @@ setTimeout(function () {
     });
     process.exit();
 }, 5000);
-	} else if (message.toString() === '?leave') {
+	} else if (message.toString() === '?leave' && connected !== false) {
 		toDiscordChat('***!Went Offline!***')
 		minecraftBot.quit()
 		connected = !connected;
@@ -80,6 +79,9 @@ setTimeout(function () {
 	} else {
 	minecraftBot.chat(message.content);
     await message.delete()
+	}
+	} catch (error) {
+		console.error(error);
 	}
 });
 
