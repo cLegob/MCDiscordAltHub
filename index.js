@@ -6,7 +6,7 @@ var connected = true;
 const discordBot = new Discord.Client({
     allowedMentions: {
         parse: ['users', 'roles'],
-        repliedUser: true;
+        repliedUser: true
     },
     intents: [Discord.Intents.FLAGS.GUILD_MESSAGES],
 });
