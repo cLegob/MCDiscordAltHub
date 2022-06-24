@@ -29,11 +29,13 @@ discordBot.on('ready', () => {
   console.log(`The Discord bot ${discordBot.user.username} is ready!`);
 });
 
+// When mc bot is logged into the server
 minecraftBot.on('login', () => {
   console.log('Minecraft bot has logged in!');
   toDiscordChat('***:green_circle: Went Online!***')
 });
 
+// When mc bot is logged out from the server
 minecraftBot.on('end', () => {
   console.log('Minecraft bot disconnected from the server.');
   toDiscordChat('***:red_circle: Went Offline!***')
@@ -47,6 +49,7 @@ async function toDiscordChat(msg) {
   });
 }
 
+// Sends mc messages to discord
 minecraftBot.on('message', (message) => {
   var current = new Date();
   const time = '[' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds() + ']'
@@ -59,9 +62,10 @@ minecraftBot.on('message', (message) => {
   }
 });
 
+// Discord commands, and discord messages to game chat
 discordBot.on('messageCreate', async (message) => {
 	try {
-    if (message.author.id === discordBot.user.id || message.channel.id !== chatChannelID || message.author.bot) return;
+    if (message.author.id === discordBot.user.id || message.channel.id !== chatChannelID || message.author.bot) return; // join command
 	if (connected === false && message.toString() === '?join') {
 		connected = !connected
 		console.log(connected)
@@ -76,14 +80,15 @@ setTimeout(function () {
     });
     process.exit();
 });
-	} else if (message.toString() === '?leave' && connected !== false) {
+	} else if (message.toString() === '?leave' && connected !== false) { // leave command
 		minecraftBot.quit()
 		connected = !connected;
 		console.log(connected)
+	// playerlist command
 	} else if (message.toString() === '?playerlist') {
 		const playerList = Object.keys(minecraftBot.players).join(", ")
 		toDiscordChat('**Current Online Players: \n`' + playerList + '`**')
-	} else {
+	} else { // messages to game chat
 	    minecraftBot.chat(message.content);
         await message.delete()
 	}
