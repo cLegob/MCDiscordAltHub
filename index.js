@@ -31,12 +31,12 @@ discordBot.on('ready', () => {
 
 minecraftBot.on('login', () => {
   console.log('Minecraft bot has logged in!');
-  toDiscordChat('***!Went Online!***')
+  toDiscordChat('***:green_circle: Went Online!***')
 });
 
 minecraftBot.on('end', () => {
   console.log('Minecraft bot disconnected from the server.');
-  toDiscordChat('***!Went Offline!***')
+  toDiscordChat('***:red_circle: Went Offline!***')
 });
 
 // Discord message handler
@@ -80,9 +80,12 @@ setTimeout(function () {
 		minecraftBot.quit()
 		connected = !connected;
 		console.log(connected)
+	} else if (message.toString() === '?playerlist') {
+		const playerList = Object.keys(minecraftBot.players).join(", ")
+		toDiscordChat('**Current Online Players: \n`' + playerList + '`**')
 	} else {
-	minecraftBot.chat(message.content);
-    await message.delete()
+	    minecraftBot.chat(message.content);
+        await message.delete()
 	}
 	} catch (error) {
 		console.error(error);
