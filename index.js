@@ -12,7 +12,7 @@ let minecraftBot;
 botMaker();
 function botMaker ()  { 
   minecraftBot = mineflayer.createBot({
-    host: 'minecraft.server', // server IP goes here, use local host if connecting to LAN
+    host: 'minecraft.server', // server IP goes here, use localhost if connecting to LAN
     username: process.env.EMAIL,
     password: process.env.PASSWORD,
     // port: 12345, // uncomment this if connecting to LAN and put in the right port number
