@@ -88,7 +88,7 @@ discordBot.on('messageCreate', async (message) => {
             minecraftBot.quit();
             connected = !connected;
             console.log(connected);
-        } else if (message.toString() === '?playerlist') { // playerlist command
+        } else if (message.toString() === '?playerlist' && connected !== false) { // playerlist command
             const playerList = Object.keys(minecraftBot.players).join(", ");
             toDiscordChat('**Current Online Players: \n`' + playerList + '`**');
         } else { // messages to game chat
