@@ -15,13 +15,18 @@ let minecraftBot;
 botMaker();
 
 function botMaker() {
-    minecraftBot = mineflayer.createBot({
-        host: 'minecraft.server', // server IP goes here, use localhost if connecting to LAN
-        username: process.env.EMAIL,
-        password: process.env.PASSWORD,
-        // port: 12345, // uncomment this if connecting to LAN and put in the right port number
-        auth: 'microsoft', // comment this out if you haven't migrated
-    });
+    try {
+        minecraftBot = mineflayer.createBot({
+            host: 'minecraft.server', // server IP goes here, use localhost if connecting to LAN
+            username: process.env.EMAIL,
+            password: process.env.PASSWORD,
+            // port: 12345, // uncomment this if connecting to LAN and put in the right port number
+            auth: 'microsoft', // comment this out if you haven't migrated
+        });
+    } catch (error) {
+        console.error(error);
+        botMaker();
+    }
 }
 
 // ID variables
