@@ -1,14 +1,14 @@
 require('dotenv').config();
 const mineflayer = require('mineflayer');
-const Discord = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js')
 var connected = true;
 
-const discordBot = new Discord.Client({
+const discordBot = new Client({
     allowedMentions: {
         parse: ['users', 'roles'],
         repliedUser: true
     },
-    intents: [Discord.Intents.FLAGS.GUILD_MESSAGES],
+    intents: [GatewayIntentBits.Guilds],
 });
 
 let minecraftBot;
