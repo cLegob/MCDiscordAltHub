@@ -8,7 +8,10 @@ const discordBot = new Client({
         parse: ['users', 'roles'],
         repliedUser: true
     },
-    intents: [GatewayIntentBits.Guilds],
+    intents: [ 
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,] 
 });
 
 let minecraftBot;
