@@ -24,6 +24,6 @@ If you cant get the .env file to work on linux, you can replace
 process.env.EMAIL, process.env.PASSWORD, and process.env.BOT_TOKEN, with their respective values inside of index.js
 
 # Commands
-?join
-?leave
-?playerlist
+?join  
+?leave  
+?playerlist  
