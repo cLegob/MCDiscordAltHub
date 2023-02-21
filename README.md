@@ -27,3 +27,6 @@ process.env.EMAIL, process.env.PASSWORD, and process.env.BOT_TOKEN, with their r
 ?join  
 ?leave  
 ?playerlist  
+
+# Other Info
+You may have to go through a microsoft verification before you can log in, just comment out the password field and go through the steps, when you're done, uncomment the password field.
