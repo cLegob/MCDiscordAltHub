@@ -1,17 +1,22 @@
 require('dotenv').config();
 const mineflayer = require('mineflayer');
-const { Client, GatewayIntentBits } = require('discord.js')
+const {
+    Client,
+    GatewayIntentBits
+} = require('discord.js')
 var connected = true;
+var autoReconnect = false;
 
 const discordBot = new Client({
     allowedMentions: {
         parse: ['users', 'roles'],
         repliedUser: true
     },
-    intents: [ 
+    intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,] 
+        GatewayIntentBits.MessageContent,
+    ]
 });
 
 let minecraftBot;
@@ -45,12 +50,27 @@ discordBot.on('ready', () => {
 minecraftBot.on('login', () => {
     console.log('Minecraft bot has logged in!');
     toDiscordChat('***:green_circle: Went Online!***');
+    connected = !connected;
 });
 
 // When mc bot is logged out from the server
 minecraftBot.on('end', () => {
     console.log('Minecraft bot disconnected from the server.');
     toDiscordChat('***:red_circle: Went Offline!***');
+    connected = !connected;
+    if (autoReconnect === true) {
+        setTimeout(function() {
+            process.on("exit", function() {
+                require("child_process").spawn(process.argv.shift(), process.argv, {
+                    cwd: process.cwd(),
+                    detached: true,
+                    stdio: "inherit"
+                });
+            });
+            process.exit();
+        });
+    }
+
 });
 
 // Discord message handler
@@ -79,9 +99,6 @@ discordBot.on('messageCreate', async (message) => {
     try {
         if (message.author.id === discordBot.user.id || message.channel.id !== chatChannelID || message.author.bot) return; // join command
         if (connected === false && message.toString() === '?join') {
-            connected = !connected;
-            console.log(connected);
-            console.log("This is pid " + process.pid);
             setTimeout(function() {
                 process.on("exit", function() {
                     require("child_process").spawn(process.argv.shift(), process.argv, {
@@ -92,13 +109,19 @@ discordBot.on('messageCreate', async (message) => {
                 });
                 process.exit();
             });
-        } else if (message.toString() === '?leave' && connected !== false) { // leave command
+        } else if (message.toString() === '?leave' && connected === true) { // leave command
             minecraftBot.quit();
-            connected = !connected;
-            console.log(connected);
-        } else if (message.toString() === '?playerlist' && connected !== false) { // playerlist command
+        } else if (message.toString() === '?playerlist' && connected === true) { // playerlist command
             const playerList = Object.keys(minecraftBot.players).join(", ");
             toDiscordChat('**Current Online Players: ```' + playerList + '```**');
+        } else if (message.toString() === '?autoreconnect' && connected === true) {
+            autoReconnect != autoReconnect;
+            if (autoReconnect === false) {
+                toDiscordChat('*** :arrows_counterclockwise: Auto-Reconnect Has Been Disabled! ***');
+            }
+            if (autoReconnect === true) {
+                toDiscordChat('*** :arrows_counterclockwise: Auto-Reconnect Has Been Enabled! ***');
+            }
         } else { // messages to game chat
             minecraftBot.chat(message.content);
             await message.delete();
