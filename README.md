@@ -27,6 +27,7 @@ process.env.EMAIL, process.env.PASSWORD, and process.env.BOT_TOKEN, with their r
 ?join  
 ?leave  
 ?playerlist  
+?reconnect
 
 # Other Info
-You may have to go through a microsoft verification before you can log in, just comment out the password field and go through the steps, when you're done, uncomment the password field.
+You may have to go through a microsoft verification before you can log in, just comment out the password field and go through the steps, when you're done, uncomment the password field. The bot will automatically reconnect to the server when it has lost connection.
