@@ -4,8 +4,8 @@ const {
     Client,
     GatewayIntentBits
 } = require('discord.js')
-var connected = true;
-var autoReconnect = false;
+var connected = false;
+var autoReconnect = true;
 
 const discordBot = new Client({
     allowedMentions: {
@@ -21,6 +21,7 @@ const discordBot = new Client({
 
 let minecraftBot;
 botMaker();
+
 
 function botMaker() {
     try {
@@ -97,7 +98,6 @@ minecraftBot.on('message', (message) => {
 discordBot.on('messageCreate', async (message) => {
     try {
         if (message.author.id === discordBot.user.id || message.channel.id !== chatChannelID || message.author.bot) return; // join command
-        autoReconnect = !autoReconnect;
         if (connected === false && message.toString() === '?join') {
             setTimeout(function() {
                 process.on("exit", function() {
