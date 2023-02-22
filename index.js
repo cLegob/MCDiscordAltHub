@@ -56,9 +56,8 @@ minecraftBot.on('login', () => {
 // When mc bot is logged out from the server
 minecraftBot.on('end', () => {
     console.log('Minecraft bot disconnected from the server.');
-    toDiscordChat('***:red_circle: Went Offline!***');
     connected = !connected;
-    if (autoReconnect === true) {
+    if (autoReconnect === true && connected === false) {
         setTimeout(function() {
             process.on("exit", function() {
                 require("child_process").spawn(process.argv.shift(), process.argv, {
@@ -98,6 +97,7 @@ minecraftBot.on('message', (message) => {
 discordBot.on('messageCreate', async (message) => {
     try {
         if (message.author.id === discordBot.user.id || message.channel.id !== chatChannelID || message.author.bot) return; // join command
+        autoReconnect = !autoReconnect;
         if (connected === false && message.toString() === '?join') {
             setTimeout(function() {
                 process.on("exit", function() {
@@ -109,19 +109,16 @@ discordBot.on('messageCreate', async (message) => {
                 });
                 process.exit();
             });
+        } else if (message.toString() === '?reconnect' && connected === true) { // reconnect command
+            toDiscordChat('***:arrows_counterclockwise: Reconnecting!***');
+            minecraftBot.quit();
         } else if (message.toString() === '?leave' && connected === true) { // leave command
+            toDiscordChat('***:red_circle: Went Offline!***');
+            autoReconnect = !autoReconnect;
             minecraftBot.quit();
         } else if (message.toString() === '?playerlist' && connected === true) { // playerlist command
             const playerList = Object.keys(minecraftBot.players).join(", ");
             toDiscordChat('**Current Online Players: ```' + playerList + '```**');
-        } else if (message.toString() === '?autoreconnect' && connected === true) {
-            autoReconnect != autoReconnect;
-            if (autoReconnect === false) {
-                toDiscordChat('*** :arrows_counterclockwise: Auto-Reconnect Has Been Disabled! ***');
-            }
-            if (autoReconnect === true) {
-                toDiscordChat('*** :arrows_counterclockwise: Auto-Reconnect Has Been Enabled! ***');
-            }
         } else { // messages to game chat
             minecraftBot.chat(message.content);
             await message.delete();
