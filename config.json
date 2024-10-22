@@ -1,8 +1,0 @@
-{
-  "discordServerID": "your-discord-server-id",
-  "chatChannelID": "your-discord-channel-id",
-  "minecraftServer": {
-    "host": "minecraft.server",  // Replace with your Minecraft server IP or 'localhost' for LAN
-    "port": 25565  // Only edit this line if the server is running on a different port than the default
-  }
-}
