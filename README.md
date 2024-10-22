@@ -22,7 +22,7 @@ Follow these steps to set up and run the bot locally.
 
 Open a terminal and run the following command:
 
-```bash
+```
 git clone https://github.com/yourusername/MCDiscordAltHub.git cd MCDiscordAltHub
 ```
 
@@ -30,7 +30,7 @@ git clone https://github.com/yourusername/MCDiscordAltHub.git cd MCDiscordAltHub
 
 Run the following command to install the required packages:
 
-```bash
+```
 npm install mineflayer discord.js
 ```
 
@@ -39,7 +39,7 @@ npm install mineflayer discord.js
 Fill in the information in both ecosystem.json and config.json
 
 ecosystem.json:
-```bash
+```
 {
   "apps": [
     {
@@ -57,7 +57,7 @@ ecosystem.json:
 ```
 
 config.json:
-```bash
+```
 {
   "discordServerID": "your-discord-server-id",
   "chatChannelID": "your-discord-channel-id",
@@ -75,7 +75,7 @@ config.json:
 
 Run the following commands in Command Prompt or PowerShell:
 
-```bash
+```
 cd MCDiscordAltHub npm start
 ```
 
@@ -83,7 +83,7 @@ cd MCDiscordAltHub npm start
 
 Run the following commands in your terminal:
 
-```bash
+```
 cd MCDiscordAltHub npm start
 ```
 
