@@ -22,27 +22,51 @@ Follow these steps to set up and run the bot locally.
 
 Open a terminal and run the following command:
 
+```bash
 git clone https://github.com/yourusername/MCDiscordAltHub.git cd MCDiscordAltHub
-
-bash
-
+```
 
 ### 2. Install Dependencies
 
 Run the following command to install the required packages:
 
+```bash
 npm install mineflayer discord.js
+```
 
-mathematica
+### 3. Set ecosystem.json and config.json
 
+Fill in the information in both ecosystem.json and config.json
 
-### 3. Set Environment Variables
+ecosystem.json:
+```bash
+{
+  "apps": [
+    {
+      "name": "discord-minecraft-bot",
+      "script": "./bot.js",
+      "env": {
+        "BOT_TOKEN": "bot_token",
+        "EMAIL": "email",
+        "PASSWORD": "password",
+        "AUTH_TYPE": "microsoft"  // Use 'microsoft' or another type if needed
+      }
+    }
+  ]
+}
+```
 
-Set the following environment variables in your terminal:
-
-export BOT_TOKEN=your-bot-token export EMAIL=your-email export PASSWORD=your-password export AUTH_TYPE=microsoft # Use 'microsoft' or another authentication type if needed
-
-shell
+config.json:
+```bash
+{
+  "discordServerID": "your-discord-server-id",
+  "chatChannelID": "your-discord-channel-id",
+  "minecraftServer": {
+    "host": "minecraft.server",  // Replace with your Minecraft server IP or 'localhost' for LAN
+    "port": 25565  // Only edit this line if the server is running on a different port than the default
+  }
+}
+```
 
 
 ### 4. Running the Bot
@@ -51,19 +75,17 @@ shell
 
 Run the following commands in Command Prompt or PowerShell:
 
+```bash
 cd MCDiscordAltHub npm start
-
-shell
-
+```
 
 #### Linux
 
 Run the following commands in your terminal:
 
+```bash
 cd MCDiscordAltHub npm start
-
-markdown
-
+```
 
 ## Bot Commands
 
