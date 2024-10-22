@@ -1,0 +1,14 @@
+{
+  "apps": [
+    {
+      "name": "discord-minecraft-bot",
+      "script": "./bot.js",
+      "env": {
+        "BOT_TOKEN": "bot_token",
+        "EMAIL": "email",
+        "PASSWORD": "password",
+        "AUTH_TYPE": "microsoft"  // Use 'microsoft' or another type if needed
+      }
+    }
+  ]
+}
