@@ -74,7 +74,7 @@ fs.readFile(configFilePath, 'utf8', (err, data) => {
             process.exit(1);
         }
 
-        console.log(`Updated ${keyPath} to ${current[lastKey]} in ecosystem.json.`);
+        console.log(`Updated ${keyPath} to ${current[lastKey]}`);
 
         // Convert JSON to .env format and write to .env file
         const envContent = jsonToEnv(config);
@@ -83,7 +83,6 @@ fs.readFile(configFilePath, 'utf8', (err, data) => {
                 console.error('Error writing to .env:', envWriteErr);
                 process.exit(1);
             }
-            console.log('.env updated successfully.');
         });
     });
 });

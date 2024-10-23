@@ -44,7 +44,7 @@ ecosystem.json:
   "apps": [
     {
       "name": "discord-minecraft-bot",
-      "script": "./bot.js",
+      "script": "./mcdah.js",
       "env": {
         "BOT_TOKEN": "bot_token",
         "EMAIL": "email",
