@@ -80,7 +80,11 @@ This file is used for configuring PM2 to manage your bot. This file can not be e
 3. **`!reload`**: reloads the bot to update the bot after changing the options file (also useful for quickly reconnecting to a server)
 4. **`!options`**: allows you to view the options file
 5. **`!editoptions`**: allows you to edit the options file (*requires a key value pair*) example: `!editoptions minecraft.server_host=mc.javasurvival.com`
+6. Put a `.` before any message to send it in-game
 
 ## Contributing
 
 Feel free to contact me on discord (Braden @bradenm64), or create an issue on GitHub
+
+## Note
+Features such as minecraft chat -> discord chat are currently unavaliable, I'd like to fix this in the future, and continue to add some more commands/config options :)
