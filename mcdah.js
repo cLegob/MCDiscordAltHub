@@ -197,6 +197,7 @@ async function handleDiscordMessage(message) {
 
 // Reconnects the Minecraft bot
 function reloadMinecraftBot() {
-    exec('node updateConfig.js');
+    exec('node updateEcosystem.js');
+    exec('node updateEnv.js');
     exec('pm2 restart mcdah.js');
 }
