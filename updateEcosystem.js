@@ -4,32 +4,15 @@ const path = require('path');
 // Get command line arguments
 const args = process.argv.slice(2);
 if (args.length !== 2) {
-    console.error('Usage: node updateConfig.js <key> <value>');
+    console.error('Usage: node updateEcosystem.js <key> <value>');
     process.exit(1);
 }
 
 const [keyPath, value] = args;
 const keys = keyPath.split('.'); // Split key path by '.'
 
-// Define the path to your JSON config file and .env file
+// Define the path to your JSON config file
 const configFilePath = path.join(__dirname, 'ecosystem.json');
-const envFilePath = path.join(__dirname, '.env');
-
-// Function to convert JSON config to .env format
-function jsonToEnv(config) {
-    const envData = [
-        `MINECRAFT_EMAIL=${config.minecraft.email}`,
-        `MINECRAFT_PASSWORD=${config.minecraft.password}`,
-        `MINECRAFT_SERVER_HOST=${config.minecraft.server_host}`,
-        `MINECRAFT_SERVER_PORT=${config.minecraft.server_port}`,
-        `MINECRAFT_AUTH_TYPE=${config.minecraft.auth_type}`,
-        `DISCORD_SERVER_ID=${config.discord.server_id}`,
-        `DISCORD_COMMAND_CENTER_ID=${config.discord.command_center_id}`,
-        `DISCORD_BOT_TOKEN=${config.discord.bot_token}`,
-        `SETTINGS_AUTO_RECONNECT=${config.settings.auto_reconnect}`,
-    ];
-    return envData.join('\n');
-}
 
 // Read the existing configuration
 fs.readFile(configFilePath, 'utf8', (err, data) => {
@@ -75,14 +58,5 @@ fs.readFile(configFilePath, 'utf8', (err, data) => {
         }
 
         console.log(`Updated ${keyPath} to ${current[lastKey]}`);
-
-        // Convert JSON to .env format and write to .env file
-        const envContent = jsonToEnv(config);
-        fs.writeFile(envFilePath, envContent, (envWriteErr) => {
-            if (envWriteErr) {
-                console.error('Error writing to .env:', envWriteErr);
-                process.exit(1);
-            }
-        });
     });
 });
