@@ -1,0 +1,11 @@
+{
+    "minecraft": {
+        "server_host": "server_ip",
+        "server_port": 25565,
+        "auto_reconnect": true,
+        "reconnect_time_seconds": 5
+    },
+    "discord": {
+        "coming_soon": "maybe :)"
+    }
+}
