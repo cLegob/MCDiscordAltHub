@@ -5,10 +5,10 @@ const { exec } = require('child_process');
 
 let options;
 try {
-    const data = fs.readFileSync('options.json', 'utf8');
+    const data = fs.readFileSync(process.env.OPTIONS_FILE, 'utf8');
     options = JSON.parse(data);
 } catch (err) {
-    console.error('Error reading or parsing options.json:', err);
+    console.error(`Error reading or parsing ${process.env.OPTIONS_FILE}:`, err);
     process.exit(1);
 }
 
@@ -169,7 +169,7 @@ async function handleEditOptions(args) {
     }
 
     // Execute the updateConfig.js script
-    exec(`node updateOptions.js ${keyPath} ${value}`, (error, stdout) => {
+    exec(`node updateOptions.js ${process.env.OPTIONS_FILE} ${keyPath} ${value}`, (error, stdout) => {
         if (error) {
             toDiscordChat(`***:x: Failed to update options.***\n\`\`\`${error}\`\`\``);
             return;
@@ -184,9 +184,9 @@ async function handleEditOptions(args) {
 
 // Handles the options command
 async function handleOptions() {
-    fs.readFile('options.json', 'utf8', async (err, data) => {
+    fs.readFile(process.env.OPTIONS_FILE, 'utf8', async (err, data) => {
         if (err) {
-            await toDiscordChat(`***:x: Failed to read options.json file.***\n\`\`\`${err}\`\`\``);
+            await toDiscordChat(`***:x: Failed to read ${process.env.OPTIONS_fILE} file.***\n\`\`\`${err}\`\`\``);
             return;
         }
 
@@ -195,7 +195,7 @@ async function handleOptions() {
         try {
             config = JSON.parse(data);
         } catch (jsonErr) {
-            await toDiscordChat(`***:x: Failed to parse options.json file.***\n\`\`\`${jsonErr}\`\`\``);
+            await toDiscordChat(`***:x: Failed to parse ${process.env.OPTIONS_FILE} file.***\n\`\`\`${jsonErr}\`\`\``);
             return;
         }
 
