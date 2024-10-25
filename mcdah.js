@@ -103,7 +103,7 @@ async function handleDiscordMessage(message) {
 
                 case 'join':
                     if (!connected) {
-                        await reloadMinecraftBot();
+                        minecraftBot.connect();
                     } else {
                         await toDiscordChat('***:green_circle: Already connected to Minecraft!***');
                     }
@@ -206,7 +206,7 @@ async function handleOptions() {
 
 // Reconnects the Minecraft bot
 async function reloadMinecraftBot() {
-    exec('pm2 restart mcdah.js --update-env', (error, stdout) => {
+    exec(`pm2 restart ${process.env.name} --update-env`, (error, stdout) => {
         if (error) {
             console.error(`Error restarting Minecraft bot: ${error}`);
             return;
