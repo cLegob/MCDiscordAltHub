@@ -4,6 +4,7 @@ module.exports = {
         script: 'mcdah.js',
         env: {
             NODE_ENV: 'production',
+            OPTIONS_FILE: 'options.json',
 
             MINECRAFT_EMAIL: 'your_email',
             MINECRAFT_PASSWORD: 'your_password',
